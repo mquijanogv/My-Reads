@@ -3,6 +3,7 @@ import BookShelf from './BookShelf'
 import Search from './Search'
 import * as APIclient from './BooksAPI'
 import './App.css'
+import { Route } from 'react-router-dom'
 
 class BooksApp extends React.Component {
   state = {
@@ -43,26 +44,31 @@ class BooksApp extends React.Component {
     const { books } = this.state;
     return (
        <div className="app">
-        <div className="list-books-title">
-          <h1>MyReads</h1>
-        </div>
-        <BookShelf
-          books={books}
-          shelfName={"currentlyReading"}
-          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
-        />
-        <BookShelf
-          books={books}
-          shelfName={"wantToRead"}
-          moveBookToAnotherShelf={"moveBookToAnotherShelf"}
-          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
-        />
-        <BookShelf
-          books={books}
-          shelfName={"read"}
-          moveBookToAnotherShelf={"moveBookToAnotherShelf"}
-          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
-        />
+          <Route exact path='/' render={() => (
+            <div>
+            <div className="list-books-title">
+              <h1>MyReads</h1>
+            </div>
+              <BookShelf
+                books={books}
+                shelfName={"currentlyReading"}
+                moveBookToAnotherShelf={this.moveBookToAnotherShelf}
+              />
+              <BookShelf
+                books={books}
+                shelfName={"wantToRead"}
+                moveBookToAnotherShelf={this.moveBookToAnotherShelf}
+              />
+              <BookShelf
+                books={books}
+                shelfName={"read"}
+                moveBookToAnotherShelf={this.moveBookToAnotherShelf}
+              />
+            </div>
+          )}/>
+          <Route exact path='/search' render={() => (
+            <Search />
+          )}/>
       </div>
     )
   }

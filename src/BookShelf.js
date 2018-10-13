@@ -1,5 +1,6 @@
 import React from 'react'
 import './App.css'
+import { Link } from 'react-router-dom';
 
 class BookShelf extends React.Component {
 
@@ -58,6 +59,11 @@ class BookShelf extends React.Component {
                   ))}
                 </ol>
               </div>
+            </div>
+            <div className="open-search">
+              <Link to='/search'>
+                Add Contact
+              </Link>
             </div>
           </div>
         </div>
