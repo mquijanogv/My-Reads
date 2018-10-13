@@ -16,6 +16,27 @@ class BooksApp extends React.Component {
     });
   }
 
+  moveBookToAnotherShelf = (value, id) => {
+    console.log("ssss")
+    let updatedBooks = this.state.books.map((book) => {
+      if (book.id === id) {
+        APIclient.update(book, value);
+        return {
+                ...book,
+                shelf : value
+              }
+      } else {
+        return book
+      }
+    });
+
+    console.log(updatedBooks)
+    this.setState({books: updatedBooks})
+
+
+
+  }
+
 
 
   render() {
@@ -28,14 +49,19 @@ class BooksApp extends React.Component {
         <BookShelf
           books={books}
           shelfName={"currentlyReading"}
+          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
         />
         <BookShelf
           books={books}
           shelfName={"wantToRead"}
+          moveBookToAnotherShelf={"moveBookToAnotherShelf"}
+          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
         />
         <BookShelf
           books={books}
           shelfName={"read"}
+          moveBookToAnotherShelf={"moveBookToAnotherShelf"}
+          moveBookToAnotherShelf={this.moveBookToAnotherShelf}
         />
       </div>
     )

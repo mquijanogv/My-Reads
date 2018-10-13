@@ -20,8 +20,10 @@ class BookShelf extends React.Component {
     return (shelf === bookShelf ? "\u2713" : "")
   }
 
+
+
   render() {
-    const { books, shelfName } = this.props;
+    const { books, shelfName, moveBookToAnotherShelf } = this.props;
     const shelfBooks = books.filter((book) => book.shelf === shelfName)
     const { getShelfName, renderCheckMark } = this;
     return (
@@ -38,8 +40,8 @@ class BookShelf extends React.Component {
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                          <select>
-                            <option value="move" disabled>Move to...</option>
+                          <select onChange={(event) => moveBookToAnotherShelf(event.target.value, book.id )}>
+                            <option value="move">Move to...</option>
                             <option value="currentlyReading">{renderCheckMark("currentlyReading", book.shelf)} Currently Reading</option>
                             <option value="wantToRead">{renderCheckMark("wantToRead", book.shelf)} Want to Read</option>
                             <option value="read">{renderCheckMark("read", book.shelf)} Read</option>
