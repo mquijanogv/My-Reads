@@ -3,7 +3,7 @@ import './App.css'
 
 class BookShelf extends React.Component {
 
-  shelfName = (name) => {
+  getShelfName = (name) => {
     switch(name) {
       case 'currentlyReading':
         return 'Currently Reading';
@@ -16,15 +16,20 @@ class BookShelf extends React.Component {
     }
   }
 
+  renderCheckMark = (shelf, bookShelf) => {
+    return (shelf === bookShelf ? "\u2713" : "")
+  }
+
   render() {
     const { books, shelfName } = this.props;
     const shelfBooks = books.filter((book) => book.shelf === shelfName)
+    const { getShelfName, renderCheckMark } = this;
     return (
       <div className="list-books">
         <div className="list-books-content">
           <div>
             <div className="bookshelf">
-              <h2 className="bookshelf-title">{this.shelfName(shelfName)}</h2>
+              <h2 className="bookshelf-title">{getShelfName(shelfName)}</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {shelfBooks.map((book) => (
@@ -35,9 +40,9 @@ class BookShelf extends React.Component {
                         <div className="book-shelf-changer">
                           <select>
                             <option value="move" disabled>Move to...</option>
-                            <option value="currentlyReading">Currently Reading</option>
-                            <option value="wantToRead">Want to Read</option>
-                            <option value="read">Read</option>
+                            <option value="currentlyReading">{renderCheckMark("currentlyReading", book.shelf)} Currently Reading</option>
+                            <option value="wantToRead">{renderCheckMark("wantToRead", book.shelf)} Want to Read</option>
+                            <option value="read">{renderCheckMark("read", book.shelf)} Read</option>
                             <option value="none">None</option>
                           </select>
                         </div>
