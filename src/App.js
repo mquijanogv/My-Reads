@@ -18,7 +18,6 @@ class BooksApp extends React.Component {
   }
 
   moveBookToAnotherShelf = (value, id) => {
-    console.log("ssss")
     let updatedBooks = this.state.books.map((book) => {
       if (book.id === id) {
         APIclient.update(book, value);
@@ -30,15 +29,15 @@ class BooksApp extends React.Component {
         return book
       }
     });
-
-    console.log(updatedBooks)
     this.setState({books: updatedBooks})
-
-
-
   }
 
-
+  getThumbnailURL = (bookImageLinks) => {
+    return (bookImageLinks === undefined ?
+      "http://via.placeholder.com/128x193?text=No%20Cover"
+      : bookImageLinks.thumbnail
+    )
+  }
 
   render() {
     const { books } = this.state;
@@ -67,7 +66,9 @@ class BooksApp extends React.Component {
             </div>
           )}/>
           <Route exact path='/search' render={() => (
-            <Search />
+            <Search
+              getThumbnailURL={this.getThumbnailURL}
+            />
           )}/>
       </div>
     )
