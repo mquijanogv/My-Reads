@@ -39,6 +39,26 @@ class BooksApp extends React.Component {
     )
   }
 
+  addBookToShelf = (shelf, book) => {
+    const bookAlreadyInShelf = this.checkForDupe(book.id)
+    if (!bookAlreadyInShelf) {
+      APIclient.update(book, shelf);
+      this.setState({
+        books: [...this.state.books, book]
+      })
+    } else {
+      console.log("Book is already in Shelf")
+      return;
+    }
+  }
+
+  checkForDupe(id) {
+    var found = this.state.books.some((book) => {
+      return book.id === id;
+    });
+    return (found ? true : false)
+  }
+
   render() {
     const { books } = this.state;
     return (
@@ -68,6 +88,8 @@ class BooksApp extends React.Component {
           <Route exact path='/search' render={() => (
             <Search
               getThumbnailURL={this.getThumbnailURL}
+              addBookToShelf={this.addBookToShelf}
+              books={this.state.books}
             />
           )}/>
       </div>

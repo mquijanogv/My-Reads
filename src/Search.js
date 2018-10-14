@@ -30,7 +30,7 @@ class Search extends React.Component {
 
   render() {
     const { query } = this.state.query;
-    const { getThumbnailURL } = this.props;
+    const { getThumbnailURL, addBookToShelf, books } = this.props;
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -48,6 +48,8 @@ class Search extends React.Component {
         <SearchResults
          results = {this.state.results}
          getThumbnailURL = {getThumbnailURL}
+         addBookToShelf = {addBookToShelf}
+         books = { books }
         />
       </div>
 

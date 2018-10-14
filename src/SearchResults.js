@@ -9,22 +9,23 @@ class SearchResults extends Component {
      });
    }
 
-   /**
-   * @description Method to check that results is not empty
-   * @param {array} obj - Results array
-   */
-   checkForEmpty = (res) => {
-     if (res === "undefined" || res.length === 0) {
-       return [];
-     }
-     return res;
-   }
+  moveBookToShelf = (event, book, addBookToShelf) => {
+    if (event.target.value === "none"){
+      return;
+    }
+    const updatedBook = {
+      ...book,
+      shelf: event.target.value
+    }
+
+  addBookToShelf (event.target.value, updatedBook);
+  }
 
 render() {
-    const searchResults = this.checkForEmpty(this.props.results)
-    const { getThumbnailURL } = this.props;
+    const searchResults = this.props.results
+    const { getThumbnailURL, addBookToShelf, books } = this.props;
     return(
-    <div>
+    <div className="search-results">
       {searchResults !== "undefined" && (
         <ol className="books-grid">
           {searchResults.map((book) => (
@@ -33,7 +34,7 @@ render() {
                 <div className="book-top">
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${getThumbnailURL(book.imageLinks)})` }}></div>
                   <div className="book-shelf-changer">
-                    <select>
+                    <select onChange={(event) => {this.moveBookToShelf(event, book, addBookToShelf, books)}}>
                       <option value="none" disabled>Move to...</option>
                       <option value="currentlyReading">Currently Reading</option>
                       <option value="wantToRead">Want to Read</option>

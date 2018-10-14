@@ -52,7 +52,7 @@ class BookShelf extends React.Component {
                       </div>
                       <div className="book-title">{book.title}</div>
                       <div className="book-authors">
-                        {book.authors[0]}<br/>
+                        {book.authors}<br/>
                       </div>
                     </div>
                   </li>
