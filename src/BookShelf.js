@@ -1,11 +1,13 @@
 import React from 'react'
 import './App.css'
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types'
 
 // Stateless React Component
 const BookShelf = (props) => {
     const { books, shelfName, moveBookToAnotherShelf, renderCheckMark, shelfNameObject } = props;
-    const shelfBooks = books.filter((book) => book.shelf === shelfName)
+    const shelfBooks = books.filter((book) => book.shelf === shelfName);
+
     return (
       <div className="list-books">
         <div className="list-books-content">
@@ -48,6 +50,14 @@ const BookShelf = (props) => {
         </div>
       </div>
     )
+}
+
+BookShelf.propTypes = {
+  books: PropTypes.array.isRequired,
+  shelfName: PropTypes.string.isRequired,
+  moveBookToAnotherShelf: PropTypes.func.isRequired,
+  renderCheckMark: PropTypes.func.isRequired,
+  shelfNameObject: PropTypes.object.isRequired
 }
 
 export default BookShelf;

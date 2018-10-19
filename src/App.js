@@ -11,7 +11,7 @@ class BooksApp extends React.Component {
     shelfName : {
       'currentlyReading': 'Currently Reading',
       'wantToRead': 'Want to Read',
-      'read':'read'
+      'read':'Read'
     }
   }
 
@@ -72,7 +72,7 @@ class BooksApp extends React.Component {
         books: [...this.state.books, book]
       })
     } else {
-      console.log("Book is already in Shelf")
+      console.warn("Book is already in Shelf")
       return;
     }
   }
@@ -86,22 +86,6 @@ class BooksApp extends React.Component {
       book.id === id
   ))}
 
-  /**
-  * @description Method that returns the name of the shelf that is going to be rendered
-  * @param {string} name - Name of the shelf in camel case
-  */
-  getShelfName = (name) => {
-    switch(name) {
-      case 'currentlyReading':
-        return 'Currently Reading';
-      case 'wantToRead':
-        return 'Want to Read';
-      case 'read':
-        return 'Read'
-      default:
-        return 'No Shelf Found'
-    }
-  }
   /**
   * @description Method that renders checkmark in select menu
   * @param {string} shelf - Shelf in select menu
@@ -191,7 +175,6 @@ class BooksApp extends React.Component {
               books={this.state.books}
               renderCheckMark={this.renderCheckMarkForSearchResults}
               checkForShelfInSearchResults={this.checkForShelfInSearchResults}
-              checkForBooks={this.checkForBooks}
               moveBookToShelf={this.moveBookToShelf}
             />
           )}/>

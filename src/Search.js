@@ -2,8 +2,19 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import * as APIclient from './BooksAPI'
 import SearchResults from './SearchResults'
+import PropTypes from 'prop-types'
 
 class Search extends React.Component {
+  static propTypes = {
+    getThumbnailURL: PropTypes.func.isRequired,
+    addBookToShelf: PropTypes.func.isRequired,
+    books: PropTypes.array.isRequired,
+    renderCheckMark: PropTypes.func.isRequired,
+    checkForShelfInSearchResults: PropTypes.func.isRequired,
+    moveBookToShelf: PropTypes.func.isRequired
+
+  }
+
   state = {
       query:'',
       results:[],
