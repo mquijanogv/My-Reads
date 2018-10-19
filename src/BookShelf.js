@@ -21,8 +21,6 @@ class BookShelf extends React.Component {
     return (shelf === bookShelf ? "\u2713" : "")
   }
 
-
-
   render() {
     const { books, shelfName, moveBookToAnotherShelf } = this.props;
     const shelfBooks = books.filter((book) => book.shelf === shelfName)

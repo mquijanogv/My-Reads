@@ -21,6 +21,15 @@ class SearchResults extends Component {
   addBookToShelf (event.target.value, updatedBook);
   }
 
+  renderCheckMark = (shelf, books, book) => {
+    return (this.checkForShelfInSearchResults(shelf, books, book) ? "\u2713" : "")
+  }
+
+  checkForShelfInSearchResults = (shelf, books, book) => {
+    return books.some((b) => (
+      b.id === book.id && shelf === b.shelf
+  ))}
+
 render() {
     const searchResults = this.props.results
     const { getThumbnailURL, addBookToShelf, books } = this.props;
@@ -35,10 +44,10 @@ render() {
                   <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${getThumbnailURL(book.imageLinks)})` }}></div>
                   <div className="book-shelf-changer">
                     <select onChange={(event) => {this.moveBookToShelf(event, book, addBookToShelf, books)}}>
-                      <option value="none" disabled>Move to...</option>
-                      <option value="currentlyReading">Currently Reading</option>
-                      <option value="wantToRead">Want to Read</option>
-                      <option value="read">Read</option>
+                      <option value="move">Move to...</option>
+                      <option value="currentlyReading">{this.renderCheckMark("currentlyReading", books, book)} Currently Reading</option>
+                      <option value="wantToRead">{this.renderCheckMark("wantToRead", books, book)} Want to Read</option>
+                      <option value="read">{this.renderCheckMark("read", books, book)} Read</option>
                       <option value="none">None</option>
                     </select>
                   </div>

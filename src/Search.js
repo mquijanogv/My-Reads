@@ -49,7 +49,7 @@ class Search extends React.Component {
          results = {this.state.results}
          getThumbnailURL = {getThumbnailURL}
          addBookToShelf = {addBookToShelf}
-         books = { books }
+         books = {books}
         />
       </div>
 

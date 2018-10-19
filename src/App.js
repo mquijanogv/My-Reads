@@ -53,11 +53,9 @@ class BooksApp extends React.Component {
   }
 
   checkForDupe(id) {
-    var found = this.state.books.some((book) => {
-      return book.id === id;
-    });
-    return (found ? true : false)
-  }
+    return this.state.books.some((book) => (
+      book.id === id
+    ))}
 
   render() {
     const { books } = this.state;
