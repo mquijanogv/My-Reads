@@ -2,35 +2,16 @@ import React from 'react'
 import './App.css'
 import { Link } from 'react-router-dom';
 
-class BookShelf extends React.Component {
-
-  getShelfName = (name) => {
-    switch(name) {
-      case 'currentlyReading':
-        return 'Currently Reading';
-      case 'wantToRead':
-        return 'Want to Read';
-      case 'read':
-        return 'Read'
-      default:
-        return 'No Shelf Found'
-    }
-  }
-
-  renderCheckMark = (shelf, bookShelf) => {
-    return (shelf === bookShelf ? "\u2713" : "")
-  }
-
-  render() {
-    const { books, shelfName, moveBookToAnotherShelf } = this.props;
+// Stateless React Component
+const BookShelf = (props) => {
+    const { books, shelfName, moveBookToAnotherShelf, renderCheckMark, shelfNameObject } = props;
     const shelfBooks = books.filter((book) => book.shelf === shelfName)
-    const { getShelfName, renderCheckMark } = this;
     return (
       <div className="list-books">
         <div className="list-books-content">
           <div>
             <div className="bookshelf">
-              <h2 className="bookshelf-title">{getShelfName(shelfName)}</h2>
+              <h2 className="bookshelf-title">{shelfNameObject[shelfName]}</h2>
               <div className="bookshelf-books">
                 <ol className="books-grid">
                   {shelfBooks.map((book) => (
@@ -67,7 +48,6 @@ class BookShelf extends React.Component {
         </div>
       </div>
     )
-  }
 }
 
 export default BookShelf;

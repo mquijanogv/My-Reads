@@ -9,8 +9,11 @@ class Search extends React.Component {
       results:[],
     }
 
-
-  searchForBooks =(query) => {
+    /**
+    * @description Method that makes an API call when the user types something in the input field
+    * @param {string} query - The query that the user is typing
+    */
+  searchForBooks = (query) => {
     if (query !== '') {
       APIclient.search(query)
         .then((results) => {
@@ -25,12 +28,11 @@ class Search extends React.Component {
   } else {
     this.setState({results : []});
   }
-
 }
 
   render() {
     const { query } = this.state.query;
-    const { getThumbnailURL, addBookToShelf, books } = this.props;
+    const { getThumbnailURL, addBookToShelf, books, renderCheckMark, checkForShelfInSearchResults, checkForBooks, moveBookToShelf } = this.props;
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -50,6 +52,10 @@ class Search extends React.Component {
          getThumbnailURL = {getThumbnailURL}
          addBookToShelf = {addBookToShelf}
          books = {books}
+         renderCheckMark = {renderCheckMark}
+         checkForShelfInSearchResults = {checkForShelfInSearchResults}
+         checkForBooks = {checkForBooks}
+         moveBookToShelf = {moveBookToShelf}
         />
       </div>
 
