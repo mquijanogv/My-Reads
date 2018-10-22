@@ -9,7 +9,7 @@ class Search extends React.Component {
     getThumbnailURL: PropTypes.func.isRequired,
     addBookToShelf: PropTypes.func.isRequired,
     books: PropTypes.array.isRequired,
-    renderCheckMark: PropTypes.func.isRequired,
+    setDefaultValueInSelectMenu: PropTypes.func.isRequired,
     checkForShelfInSearchResults: PropTypes.func.isRequired,
     moveBookToShelf: PropTypes.func.isRequired
 
@@ -43,7 +43,7 @@ class Search extends React.Component {
 
   render() {
     const { query } = this.state.query;
-    const { getThumbnailURL, addBookToShelf, books, renderCheckMark, checkForShelfInSearchResults, checkForBooks, moveBookToShelf } = this.props;
+    const { getThumbnailURL, addBookToShelf, books, setDefaultValueInSelectMenu, checkForShelfInSearchResults, checkForBooks, moveBookToShelf } = this.props;
     return(
       <div className="search-books">
         <div className="search-books-bar">
@@ -63,7 +63,7 @@ class Search extends React.Component {
          getThumbnailURL = {getThumbnailURL}
          addBookToShelf = {addBookToShelf}
          books = {books}
-         renderCheckMark = {renderCheckMark}
+         setDefaultValueInSelectMenu = {setDefaultValueInSelectMenu}
          checkForShelfInSearchResults = {checkForShelfInSearchResults}
          checkForBooks = {checkForBooks}
          moveBookToShelf = {moveBookToShelf}

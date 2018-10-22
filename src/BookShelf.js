@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 
 // Stateless React Component
 const BookShelf = (props) => {
-    const { books, shelfName, moveBookToAnotherShelf, renderCheckMark, shelfNameObject } = props;
+    const { books, shelfName, moveBookToAnotherShelf, shelfNameObject } = props;
     const shelfBooks = books.filter((book) => book.shelf === shelfName);
 
     return (
@@ -22,11 +22,11 @@ const BookShelf = (props) => {
                       <div className="book-top">
                         <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }}></div>
                         <div className="book-shelf-changer">
-                          <select onChange={(event) => moveBookToAnotherShelf(event.target.value, book.id )}>
+                          <select defaultValue={book.shelf} onChange={(event) => moveBookToAnotherShelf(event.target.value, book.id )}>
                             <option value="move">Move to...</option>
-                            <option value="currentlyReading">{renderCheckMark("currentlyReading", book.shelf)} Currently Reading</option>
-                            <option value="wantToRead">{renderCheckMark("wantToRead", book.shelf)} Want to Read</option>
-                            <option value="read">{renderCheckMark("read", book.shelf)} Read</option>
+                            <option value="currentlyReading"> Currently Reading</option>
+                            <option value="wantToRead"> Want to Read</option>
+                            <option value="read">Read</option>
                             <option value="none">None</option>
                           </select>
                         </div>

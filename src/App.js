@@ -113,13 +113,21 @@ class BooksApp extends React.Component {
   }
 
   /**
-  * @description Method that renders checkmarks in search results
-  * @param {string} shelf - Shelf in the select menu
-  * @param {string} books - All books stored in the state of the application
-  * @param {string} book - Book from search results
+  * @description Method that chooses default value for select menu in searchResults component
+  * @param {array} books - All books currenty on shelves
+  * @param {object} book - Book found in search
   */
-  renderCheckMarkForSearchResults = (shelf, books, book) => {
-    return (this.checkForShelfInSearchResults(shelf, books, book) ? "\u2713" : "")
+  setDefaultValueInSelectMenu = (books, book) => {
+    const found = books.some((b) => {
+    return b.id === book.id;
+    });
+
+    if (!found) {return "none"}
+    const shelf = books.filter((b) => {
+      return book.id === b.id
+    })
+    // Return shelf value
+    return shelf[0].shelf
   }
 
   /**
@@ -173,7 +181,7 @@ class BooksApp extends React.Component {
               getThumbnailURL={this.getThumbnailURL}
               addBookToShelf={this.addBookToShelf}
               books={this.state.books}
-              renderCheckMark={this.renderCheckMarkForSearchResults}
+              setDefaultValueInSelectMenu={this.setDefaultValueInSelectMenu}
               checkForShelfInSearchResults={this.checkForShelfInSearchResults}
               moveBookToShelf={this.moveBookToShelf}
             />
